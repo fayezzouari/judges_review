@@ -216,3 +216,7 @@ def project_scores(request):
         project_scores.append(scores)
 
     return render(request, 'projects_scores.html', {'project_scores': project_scores})
+
+
+def index_view(request):
+    return render(request, 'index.html')

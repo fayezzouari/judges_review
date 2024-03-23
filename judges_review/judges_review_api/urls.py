@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+    path('', views.index_view, name="index-view"),
+
     path('dashboard/', views.JudgesView.as_view({'get': 'get'}), name="dashboard" ),
     path('login/', views.judges_login_view, name="login-view"),
     path('logout/', views.LogoutView.as_view(), name="logout-view"),

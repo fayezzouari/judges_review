@@ -109,7 +109,7 @@ button:hover {
     <h1>{{user}} - My Projects</h1>
 
   <h2>Judge Project: {{ project.title }}</h2>
-  <form id="grading-form" method="post" action="http://127.0.0.1:8000/judges_space/project/{{ project.id }}/grading/">
+  <form id="grading-form" method="post" action="http://127.0.0.1:8000/project/{{ project.id }}/grading/">
       {% csrf_token %}
       <div class="axis">
         <label for="idea">Idea:</label>

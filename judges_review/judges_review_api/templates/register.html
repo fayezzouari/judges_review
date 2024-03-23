@@ -7,7 +7,7 @@
 <body>
 
 <h2>Register</h2>
-<form method="post" action="http://127.0.0.1:8000/judges_space/submit-register/">
+<form method="post" action="http://127.0.0.1:8000/submit-register/">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Register</button>

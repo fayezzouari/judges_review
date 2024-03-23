@@ -51,7 +51,7 @@
 <body>
   <div class="login-container">
     <h2>Add Porject</h2>
-    <form action="http://127.0.0.1:8000/judges_space/submit-judge-project/" method="post">
+    <form action="http://127.0.0.1:8000/submit-judge-project/" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" value="Submit">
