@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "judges_review/wsgi.py",
+      "src": "judges_review/judges_review/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "judges_review/wsgi.py"
+      "dest": "judges_review/judges_review/wsgi.py"
     }
   ]
 }
