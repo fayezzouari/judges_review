@@ -1,0 +1,81 @@
+<!-- project_scores.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Scores</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Table styles */
+.table-container {
+    margin: 0 auto;
+    overflow-x: auto;
+    max-width: 800px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+    </style>
+</head>
+<body>
+    <h1>Project Scores</h1>
+    <div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Project ID</th>
+                <th>Project Name</th>
+                {% for judge in judges %}
+                    <th>{{ judge.username }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for scores in project_scores %}
+                <tr>
+                    <td>{{ scores.project.id }}</td>
+                    <td>{{ scores.project.name }}</td>
+                    {% for judge, score in scores.judges.items %}
+                        <td>{{ judge }}</td>
+                        <td>{{ score }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>

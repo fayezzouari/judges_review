@@ -1,0 +1,133 @@
+<!-- project_board.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Account</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .project-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .project-item {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-item h2 {
+        margin-top: 0;
+    }
+
+    .project-item p {
+        margin: 0;
+    }
+
+    .project-item .project-description {
+        margin-top: 10px;
+    }
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+
+.axis {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.submit {
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>{{user}} - My Projects</h1>
+
+  <h2>Judge Project: {{ project.title }}</h2>
+  <form id="grading-form" method="post" action="http://127.0.0.1:8000/judges_space/project/{{ project.id }}/grading/">
+      {% csrf_token %}
+      <div class="axis">
+        <label for="idea">Idea:</label>
+        <input type="number" id="idea" name="idea" min="0" max="10" step="0.1" required>
+      </div>
+      <div class="axis">
+        <label for="presentation">Presentation:</label>
+        <input type="number" id="presentation" name="presentation" min="0" max="10" step="0.1" required>
+      </div>
+      <div class="axis">
+        <label for="prototype">Prototype:</label>
+        <input type="number" id="prototype" name="prototype" min="0" max="10" step="0.1" required>
+      </div>
+      <div class="submit">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+</div>
+  <!-- Add form or interface to update project score -->
+</body>
+
