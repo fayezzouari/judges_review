@@ -47,6 +47,24 @@ th {
 tbody tr:hover {
     background-color: #f9f9f9;
 }
+.logout-button-container {
+    text-align: center; /* Center the contents horizontally */
+}
+
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    background-color: #f44336; /* Red color */
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f; /* Darker red color on hover */
+}
     </style>
 </head>
 <body>
@@ -75,6 +93,10 @@ tbody tr:hover {
             {% endfor %}
         </tbody>
     </table>
+        <form method="post" action="http://127.0.0.1:8000/judges_space/logout/">
+        {% csrf_token %}
+    <button  class="logout-button">Logout</button>
+    </form>
     </div>
 
 </body>

@@ -59,21 +59,21 @@ class LoginView(APIView):
 
             username = serializer.validated_data['username']
             password = serializer.validated_data['password']
-            print(username, password)
             # Authenticate user
             user = authenticate(username=username, password=password)
             if user is not None:
                 # Login successful
                 # You can perform additional actions here like setting session data
                 login(request, user)
+                if request.user.is_superuser:
+                    return redirect('../project-scores/')
                 return redirect('../dashboard/')
             else:
                 # Authentication failed
-                return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+                return redirect('../login/')
 
         # Invalid input data
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        return redirect('../login/')
 
 class LogoutView(APIView):
     def post(self, request, format=None):
