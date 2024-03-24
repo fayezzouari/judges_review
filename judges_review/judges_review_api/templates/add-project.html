@@ -51,7 +51,7 @@
 <body>
   <div class="login-container">
     <h2>Add Porject</h2>
-    <form action="http://127.0.0.1:8000/submit-add-project/" method="post">
+    <form action="https://judges-review-tt56.vercel.app/submit-add-project/" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" value="Submit">
