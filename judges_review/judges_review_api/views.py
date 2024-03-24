@@ -29,20 +29,22 @@ class JudgesView(viewsets.ModelViewSet):
         queryset = Judgement.objects.filter(judge=request.user.id)
         projects = Project.objects.values_list('id')
         users_data = []
-        i=0
-        print(request.user)
+        
         for project in projects:
-
-            try:
-                if queryset[i].project_id.id == project[0] :
-                    user_data = {
-                        'id': project[0],
-                        'score': queryset[i].score,
-                    }
-                    i+=1
-                    users_data.append(user_data)
-            except:
-                break
+         
+           
+                for i in range(len(queryset)):
+                    
+                    if queryset[i].project_id.id == project[0] :
+                        user_data = {
+                            'id': project[0],
+                            'score': queryset[i].score,
+                        }
+                        i+=1
+                        
+                        users_data.append(user_data)
+                  
+        
         return render(request, 'dashboard.html',{'projects':users_data, 'user': request.user, 'form': form})
 
 
@@ -209,7 +211,7 @@ def project_scores(request):
             try:
                 score = Judgement.objects.get(project_id=project.id, judge=judge)
                 scores['judges'][judge.username] = score.score
-            except Judgement.DoesNotExist:
+            except:
                 continue
         project_scores.append(scores)
 
