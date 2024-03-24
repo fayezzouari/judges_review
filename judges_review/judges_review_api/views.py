@@ -27,7 +27,7 @@ class JudgesView(viewsets.ModelViewSet):
         form = ProjectSearchForm(request.POST)
 
         queryset = Judgement.objects.filter(judge=request.user.id)
-        projects = Project.objects.values_list('id', 'name')
+        projects = Project.objects.values_list('id')
         users_data = []
         i=0
         print(request.user)
@@ -37,7 +37,6 @@ class JudgesView(viewsets.ModelViewSet):
                 if queryset[i].project_id.id == project[0] :
                     user_data = {
                         'id': project[0],
-                        'name': project[1],
                         'score': queryset[i].score,
                     }
                     i+=1
@@ -70,8 +69,7 @@ class LoginView(APIView):
                 return redirect('../dashboard/')
             else:
                 # Authentication failed
-                return redirect('../login/')
-
+                return Response("")
         # Invalid input data
         return redirect('../login/')
 
@@ -93,7 +91,7 @@ class UserRegistrationAPIView(generics.CreateAPIView):
             if form.is_valid():
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password']
-                email = form.cleaned_data['email']
+                email = ""
 
                 # Create user
                 user = User.objects.create_user(username=username, password=password, email=email)
@@ -108,12 +106,12 @@ class UserRegistrationAPIView(generics.CreateAPIView):
                     pass
 
                 # Redirect to success page or any other desired page
-                return HttpResponseRedirect('judges_space/login/')  # Change this to your success URL
+                return HttpResponseRedirect('../register/')  # Change this to your success URL
 
         else:
             form = UserRegistrationForm()
 
-        return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 class AddProjectCreateView(generics.CreateAPIView):
@@ -121,10 +119,9 @@ class AddProjectCreateView(generics.CreateAPIView):
         form = AddProject(request.POST)
         if form.is_valid():
             id = form.cleaned_data['id']
-            name = form.cleaned_data['name']
-            item= Project(id=id, name=name)
+            item= Project(id=id)
             item.save()
-            return redirect('../judge-to-project/')
+            return redirect('../add-project/')
 
 
 class AssignJudgeToProject(generics.CreateAPIView):
@@ -136,7 +133,7 @@ class AssignJudgeToProject(generics.CreateAPIView):
             judge = form.cleaned_data['judge']
             item = Judgement(project_id=project_id, judge=judge)
             item.save()
-            return redirect('../add-project/')
+            return redirect('../judge-to-project/')
 
 
 def judges_login_view(request):
@@ -182,11 +179,12 @@ class GradeProject(APIView):
 
         form = forms.GradeProject(request.POST)
         if form.is_valid():
+            precision = form.cleaned_data['precision']
             presentation = form.cleaned_data['presentation']
-            prototype = form.cleaned_data['prototype']
-            #business_plan = form.cleaned_data['business_plan']
-            idea = form.cleaned_data['idea']
-            score = presentation + prototype  + idea
+            procres = form.cleaned_data['procres']
+            orgim = form.cleaned_data['orgim']
+            feasibility = form.cleaned_data['feasibility']
+            score = precision + presentation + procres + orgim + feasibility
             setattr(instance, 'score', score)  # Update the score field value
             instance.save()
             return redirect('../../../dashboard/')
@@ -220,3 +218,11 @@ def project_scores(request):
 
 def index_view(request):
     return render(request, 'index.html')
+
+
+def judge_users(request):
+    judge_group = Group.objects.get(name='Judge')
+    judges = User.objects.filter(groups=judge_group)
+    part1=judges[0:len(judges)//2]
+    part2 = judges[len(judges) // 2:]
+    return render(request, 'judges.html', {'judges1': part1, 'judges2':part2})
