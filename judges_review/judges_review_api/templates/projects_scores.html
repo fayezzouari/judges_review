@@ -74,7 +74,6 @@ tbody tr:hover {
         <thead>
             <tr>
                 <th>Project ID</th>
-                <th>Project Name</th>
                 {% for judge in judges %}
                     <th>{{ judge.username }}</th>
                 {% endfor %}
@@ -84,7 +83,6 @@ tbody tr:hover {
             {% for scores in project_scores %}
                 <tr>
                     <td>{{ scores.project.id }}</td>
-                    <td>{{ scores.project.name }}</td>
                     {% for judge, score in scores.judges.items %}
                         <td>{{ judge }}</td>
                         <td>{{ score }}</td>
@@ -93,7 +91,7 @@ tbody tr:hover {
             {% endfor %}
         </tbody>
     </table>
-        <form method="post" action="http://127.0.0.1:8000/logout/">
+        <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
     <button  class="logout-button">Logout</button>
     </form>

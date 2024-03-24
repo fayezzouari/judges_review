@@ -16,8 +16,9 @@ urlpatterns = [
     path('submit-add-project/', views.AddProjectCreateView.as_view(), name="add-project"),
     path('submit-judge-project/', views.AssignJudgeToProject.as_view(), name="judge-project"),
 
+    path('judges/', views.judge_users, name="judges-view"),
     path('add-project/', views.add_project, name="add_project"),
-    path('judge-to-project/', views.assign_judge_project, name="judge-project"),
+    path('judge-to-project/', views.assign_judge_project, name="judge_project"),
     path('project/<str:project_id>/board/', views.project_board, name='project_board'),
     path('project/<str:project_id>/grading/', views.GradeProject.as_view(),name="grading"),
 ]

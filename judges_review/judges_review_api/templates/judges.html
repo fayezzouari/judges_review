@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Judge Users</title>
+    <style>
+  /* styles.css */
+
+/* Global styles */
+/* styles.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 0 0 48%; /* Adjust the width of columns as needed */
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+}
+
+.user-item {
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.user-item:hover {
+    background-color: #f0f0f0;
+}
+
+.no-users {
+    padding: 10px 20px;
+    text-align: center;
+    color: #888888;
+    font-style: italic;
+}
+
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Judge Usernames</h1>
+        <div class="user-columns">
+            <div class="column">
+                <ul class="user-list">
+                    {% for judge in judges2 %}
+                        <li class="user-item">{{ judge.username }}</li>
+                    {% empty %}
+                        <li class="no-users">No judges found</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul class="user-list">
+                    {% for judge in judges1 %}
+                        <li class="user-item">{{ judge.username }}</li>
+                    {% empty %}
+                        <li class="no-users">No judges found</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

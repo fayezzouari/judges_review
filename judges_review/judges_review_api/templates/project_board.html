@@ -101,32 +101,53 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+.back-to-dashboard {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
+.back-to-dashboard:hover {
+    background-color: #45a049;
+}
 </style>
 </head>
 <body>
 <div class="container">
     <h1>{{user}} - My Projects</h1>
 
-  <h2>Judge Project: {{ project.title }}</h2>
-  <form id="grading-form" method="post" action="http://127.0.0.1:8000/project/{{ project.id }}/grading/">
+  <h2>Judge Project: {{ project.id }}</h2>
+  <form id="grading-form" method="post" action="{% url 'grading' project.id %}">
       {% csrf_token %}
       <div class="axis">
-        <label for="idea">Idea:</label>
-        <input type="number" id="idea" name="idea" min="0" max="10" step="0.1" required>
+        <label for="precision">Precision:</label>
+        <input type="number" id="precision" name="precision" min="0" max="20" step="0.5" required>
       </div>
       <div class="axis">
         <label for="presentation">Presentation:</label>
-        <input type="number" id="presentation" name="presentation" min="0" max="10" step="0.1" required>
+        <input type="number" id="presentation" name="presentation" min="0" max="20" step="0.5" required>
       </div>
       <div class="axis">
-        <label for="prototype">Prototype:</label>
-        <input type="number" id="prototype" name="prototype" min="0" max="10" step="0.1" required>
+        <label for="porcres">Process & Research:</label>
+        <input type="number" id="porcres" name="procres" min="0" max="20" step="0.5" required>
+      </div>
+       <div class="axis">
+        <label for="orgim">Originality & Impact:</label>
+        <input type="number" id="orgim" name="orgim" min="0" max="20" step="0.5" required>
+      </div>
+      <div class="axis">
+        <label for="feasibility">Feasibility:</label>
+        <input type="number" id="feasibility" name="feasibility" min="0" max="20" step="0.5" required>
       </div>
       <div class="submit">
         <button type="submit">Submit</button>
       </div>
     </form>
+     <a href="{% url 'dashboard' %}" class="back-to-dashboard">Back to Dashboard</a>
 </div>
   <!-- Add form or interface to update project score -->
 </body>

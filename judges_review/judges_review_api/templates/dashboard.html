@@ -149,7 +149,7 @@
 <div class="container">
     <h1>{{user}} - My Projects</h1>
      <h2>Search for a Project</h2>
-    <form method="post" action="http://127.0.0.1:8000/search/">
+    <form method="post" action="{% url 'project-search' %}">
         {% csrf_token %}
         <input type="text" name="project_id" placeholder="Project id" class="search-field">
 
@@ -159,7 +159,6 @@
          {% for project in projects %}
         <li class="project-item" >
             <h2><div style=" text-align: center;">{{ project.id }} </div></h2>
-            <p class="project-description"><div style=" text-align: center;">{{ project.name }} </div></p><br>
             <p class="project-description"><div style=" text-align: center;">{{ project.score }} </div></p><br>
 
               <a href="../project/{{project.id}}/board/" class="cute-link button blue">Judge Project</a>
@@ -169,7 +168,7 @@
 
         <!-- Add more project items as needed -->
     </ul>
-    <form method="post" action="http://127.0.0.1:8000/logout/">
+    <form method="post" action="{% url 'logout-view' %}">
         {% csrf_token %}
     <button  class="logout-button">Logout</button>
     </form>

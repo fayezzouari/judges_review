@@ -51,7 +51,7 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form action="http://127.0.0.1:8000/submit-login/" method="post">
+    <form action="{% url 'login-submition' %}" method="post">
       {% csrf_token %}
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
